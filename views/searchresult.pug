@@ -1,0 +1,9 @@
+html
+	head
+	body(style="text-align:center; background-color:dimgrey")
+		h1(style="color:powderblue; margin-top:150px") These are my findings:
+		each person in allTheUsers
+			p(style=" color:lightgreen; font-family: helvetica") #{person}
+		a(href='/') Go back to the homepage
+		br
+		a(href='/search') Search again
