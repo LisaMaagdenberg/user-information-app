@@ -1,12 +1,15 @@
 html
 	head
-	body(style="text-align:center; background-color:dimgrey")
-
-		h1(style="margin-top:150px; color:powderblue") Search for users here!!!!!!!!!!
-		p(style=" color:lightgreen; font-family: helvetica") (input is case-sensitive)			
+		| <style type="text/css">
+		include css/style.css
+		| </style>
+		link(href='https://fonts.googleapis.com/css?family=Amatica+SC', rel='stylesheet')
+	body
+		h1 Search for users
+		p (input is case-sensitive)			
 		form(action="/searchresult" method="post")
 			input(type="search" name="yolo")
 			input(type="submit" value="Search")
 		a(href='/') I changed my mind
-
+		p.copyright &copy; Lisa Maagdenberg 2017
 

@@ -1,15 +1,19 @@
 html
 	head
-	body(style="text-align:center; background-color:dimgrey")
-			h1(style="margin-top:150px; color:powderblue") Add a new user
-			p(style=" color:lightgreen; font-family: helvetica") (input is case-sensitive)
-			
-			form(action="/" method="post")
-				p First name:
-				input(type="text" name="firstname") 
-				p Last name:
-				input(type="text" name="lastname")
-				p E-mail address:
-				input(type="text" name="email") 
-				input(type="submit" value="Add user")
-			a(href='/') I changed my mind
+		| <style type="text/css">
+		include css/style.css
+		| </style>
+		link(href='https://fonts.googleapis.com/css?family=Amatica+SC|', rel='stylesheet')
+	body
+		h1 Add a new user
+		p (input is case-sensitive)
+		form(action="/" method="post")
+			p First name:
+			input(type="text" name="firstname") 
+			p Last name:
+			input(type="text" name="lastname")
+			p E-mail address:
+			input(type="text" name="email") 
+			input(type="submit" value="Add user")
+		a(href='/') I changed my mind
+		p.copyright &copy; Lisa Maagdenberg 2017

@@ -1,9 +1,17 @@
 html
 	head
-	body(style="text-align:center; background-color:dimgrey")
-		h1(style="margin-top:50px; color:powderblue") All the users!!!
+		| <style type="text/css">
+		include css/style.css
+		| </style>
+		link(href='https://fonts.googleapis.com/css?family=Amatica+SC', rel='stylesheet')
+	body
+		h1#index These are our users
 		each person in allTheUsers
-			p(style=" color:lightgreen; font-family: helvetica") #{person.firstname} #{person.lastname}
+			p #{person.firstname} #{person.lastname}
 		a(href="/search") Search for a user
 		br
 		a(href="/createuser") Create a new user
+		br
+		br
+		br
+		p.copyright &copy; Lisa Maagdenberg 2017
