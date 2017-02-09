@@ -1,15 +1,31 @@
 html
 	head
 		| <style type="text/css">
-		include css/style.css
+		include ../statics/css/style.css
 		| </style>
 		link(href='https://fonts.googleapis.com/css?family=Amatica+SC', rel='stylesheet')
 	body
 		h1 Search for users
 		p (input is case-sensitive)			
 		form(action="/searchresult" method="post")
-			input(type="search" name="yolo")
+			input(id="searchbar" type="text" name="search")
 			input(type="submit" value="Search")
 		a(href='/') I changed my mind
 		p.copyright &copy; Lisa Maagdenberg 2017
+		script(src='js/jquery-3.1.1.min.js')
+		script.
+			$('#searchbar').keypress(function(event){
+				console.log("key is pressed!!")
+				var input = event.target.value + event.key
+				console.log(input)
+				console.log(event.target.value)
+				var data = { 
+					userInput: input
+				}
+				$.post('/search', data, searching)
+			})
 
+			function searching(response, status) {
+				console.log("function working")
+
+			}

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+app.use(express.static('statics'))
 app.use(bodyParser.urlencoded({extended: true}));  
 app.use(bodyParser.json());
 
@@ -13,7 +14,7 @@ app.set('view engine', 'pug');
 //get home '/' page
 app.get('/', (req, res) => {
 	// console.log('test for get request');
-	fs.readFile('./users.json', 'utf-8', (err, data) => {
+	fs.readFile('./statics/users.json', 'utf-8', (err, data) => {
 		// console.log('readFile is called');
 		if (err) {
 			console.log('NOOOOO');
@@ -34,11 +35,37 @@ app.get('/search', (req, res) => {
 	res.render('search');
 });
 
+app.post('/search', (req, res) => {
+	const inputFromUser = req.body.userInput;
+	console.log(req.body.userInput)
+	fs.readFile('./statics/users.json', 'utf-8', (err, data) => {
+		if (err){
+			throw err;
+		}
+		const userData = JSON.parse(data);
+		var searching = [];
+		for (var i = 0; i < userData.length; i++) {
+			if (userData[i].firstname.includes(inputFromUser)) {
+				searching.push(userData[i].firstname)
+			} else if (userData[i].lastname.includes(inputFromUser)) {
+				searching.push(userData[i].lastname)
+			} else if (userData[i].email.includes(inputFromUser)) {
+				searching.push(userData[i].email)
+			}
+		}
+		console.log("searching is: " + searching)
+		console.log("userdata.lastname is: " + userData[1].lastname)
+		console.log("inputfromuser is: " + inputFromUser)
+	})
+	res.send('doing things')
+})
+
 //post and get searchresult
 app.post('/searchresult', (req, res) => {
 	// console.log('post test');
-	const inputFromUser = req.body.yolo;
-	fs.readFile('./users.json', 'utf-8', (err, data) => {
+	const inputFromUser = req.body.search;
+	console.log(req.body.search)
+	fs.readFile('./statics/users.json', 'utf-8', (err, data) => {
 		if (err) {
 			throw err;
 		}
@@ -74,7 +101,7 @@ app.post('/', (req, res) => {
 	newUser.firstname = req.body.firstname;
 	newUser.lastname = req.body.lastname;
 	newUser.email = req.body.email;
-	fs.readFile('./users.json', 'utf-8', (err, data) => {
+	fs.readFile('./statics/users.json', 'utf-8', (err, data) => {
 		if (err) {
 			throw err;
 		}
@@ -84,7 +111,7 @@ app.post('/', (req, res) => {
 		userData.push(newUser);
 		data = JSON.stringify(userData);
 		// console.log(data);
-		fs.writeFile('./users.json', data, function(err) {
+		fs.writeFile('./statics/users.json', data, function(err) {
 			if(err) {
 				throw err;
 			}
