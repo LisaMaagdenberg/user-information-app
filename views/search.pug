@@ -8,17 +8,17 @@ html
 		h1 Search for users
 		p (input is case-sensitive)			
 		form(action="/searchresult" method="post")
-			input(id="searchbar" type="text" name="search")
+			input(id="searchbar" type="text" name="search" value="Start typing...")
 			input(type="submit" value="Search")
+			ul(id='results')
 		a(href='/') I changed my mind
 		p.copyright &copy; Lisa Maagdenberg 2017
 		script(src='js/jquery-3.1.1.min.js')
 		script.
 			$('#searchbar').keypress(function(event){
-				console.log("key is pressed!!")
+				//- console.log("key is pressed!!")
 				var input = event.target.value + event.key
-				console.log(input)
-				console.log(event.target.value)
+				//- console.log(input)
 				var data = { 
 					userInput: input
 				}
@@ -26,6 +26,19 @@ html
 			})
 
 			function searching(response, status) {
-				console.log("function working")
-
+				console.log(response)
+				$(".resultbars").remove()
+				for (var i = 0; i < response.length; i++) {
+					$("#results").append("<li class='resultbars'>" + response[i] + "</li>")
+				}
 			}
+
+			$("li").click(function(){
+				console.log("yay, clicked on li!")
+				var replace = $(this).html()
+				$('#searchbar').val(replace)
+			})
+			
+			//- $('.resultbars').click(function(){
+			//- 	$("#searchbar").replaceWith('<input id="searchbar" type="text" name="search" value="' + this + '">')
+			//- })

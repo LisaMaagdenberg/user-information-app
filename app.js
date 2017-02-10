@@ -43,21 +43,20 @@ app.post('/search', (req, res) => {
 			throw err;
 		}
 		const userData = JSON.parse(data);
-		var searching = [];
+		var searchResult = [];
 		for (var i = 0; i < userData.length; i++) {
 			if (userData[i].firstname.includes(inputFromUser)) {
-				searching.push(userData[i].firstname)
+				searchResult.push(userData[i].firstname + " " + userData[i].lastname)
 			} else if (userData[i].lastname.includes(inputFromUser)) {
-				searching.push(userData[i].lastname)
+				searchResult.push(userData[i].firstname + " " + userData[i].lastname)
 			} else if (userData[i].email.includes(inputFromUser)) {
-				searching.push(userData[i].email)
+				searchResult.push(userData[i].email)
 			}
 		}
-		console.log("searching is: " + searching)
-		console.log("userdata.lastname is: " + userData[1].lastname)
+		console.log("searchResult is: " + searchResult)
 		console.log("inputfromuser is: " + inputFromUser)
+		res.send(searchResult)
 	})
-	res.send('doing things')
 })
 
 //post and get searchresult
@@ -73,11 +72,11 @@ app.post('/searchresult', (req, res) => {
 		let result = [];
 		for (var i = 0; i < userData.length; i++) {
 			// console.log('userdata firstname is: ' + userData[i].firstname);
-			if (userData[i].firstname == inputFromUser) {
+			if (userData[i].firstname.includes(inputFromUser)) {
 				result.push(userData[i].firstname + " " + userData[i].lastname + ", " + userData[i].email);
-			} else if (userData[i].lastname == inputFromUser) {
+			} else if (userData[i].lastname.includes(inputFromUser)) {
 				result.push(userData[i].firstname + " " + userData[i].lastname + ", " + userData[i].email);
-			} else if (userData[i].email == inputFromUser) {
+			} else if (userData[i].email.includes(inputFromUser)) {
 				result.push(userData[i].firstname + " " + userData[i].lastname + ", " + userData[i].email);
 			}
 		}

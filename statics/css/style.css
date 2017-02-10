@@ -15,6 +15,7 @@ p {
 	font-family: 'Amatica SC', cursive;
 	font-size: 25px;
 	font-weight: bold;
+	line-height: 8px;
 }
 
 #index {
@@ -37,4 +38,18 @@ a {
 	position: fixed;
 	right:10px;
 	bottom:5px;
+}
+
+
+#results {
+	max-width:240px;
+	margin: auto;
+	list-style-type:none;
+}
+
+.resultbars {
+	background-color:#212121;
+	color: lightgreen;
+	font-family: 'Amatica SC', cursive;
+	font-weight: bold;
 }
