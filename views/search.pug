@@ -15,14 +15,19 @@ html
 		p.copyright &copy; Lisa Maagdenberg 2017
 		script(src='js/jquery-3.1.1.min.js')
 		script.
+			var oldTime = 0
+			var newTime = 0
 			$('#searchbar').keypress(function(event){
-				//- console.log("key is pressed!!")
 				var input = event.target.value + event.key
-				//- console.log(input)
 				var data = { 
 					userInput: input
 				}
-				$.post('/search', data, searching)
+				newTime = new Date()
+				var difference = (newTime - oldTime) 
+				if (difference >= 300) {
+					$.post('/search', data, searching)
+					oldTime = newTime
+				} 
 			})
 
 			function searching(response, status) {
