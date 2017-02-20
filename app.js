@@ -78,6 +78,8 @@ app.post('/searchresult', (req, res) => {
 				result.push(userData[i].firstname + " " + userData[i].lastname + ", " + userData[i].email);
 			} else if (userData[i].email.includes(inputFromUser)) {
 				result.push(userData[i].firstname + " " + userData[i].lastname + ", " + userData[i].email);
+			} else if (userData[i].firstname + " " + userData[i].lastname === inputFromUser) {
+				result.push(userData[i].firstname + " " + userData[i].lastname + ", " + userData[i].email);
 			}
 		}
 		// console.log('result is: ' + result);
